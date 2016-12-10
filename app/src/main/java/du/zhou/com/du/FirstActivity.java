@@ -46,7 +46,7 @@ public class FirstActivity extends AppCompatActivity {
             if (count > 0) {
                 mHandler.sendEmptyMessageDelayed(0, 1000);
             } else {
-                startActivity(new Intent(FirstActivity.this, MainActivity.class));
+                startActivity(new Intent(FirstActivity.this, SlideActivity.class));
                 finish();
             }
 
