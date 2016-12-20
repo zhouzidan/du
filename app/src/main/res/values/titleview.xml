@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleView">
+
+        <attr name="img_back_visibility" format="boolean" />
+        <attr name="title_visibility" format="boolean" />
+        <attr name="title_txt" format="string" />
+        <attr name="right_tv_visibility" format="boolean" />
+        <attr name="right_tv_txt" format="string" />
+
+    </declare-styleable>
+</resources>

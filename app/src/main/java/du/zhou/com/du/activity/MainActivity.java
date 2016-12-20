@@ -1,13 +1,13 @@
-package du.zhou.com.du;
+package du.zhou.com.du.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import du.zhou.com.du.R;
 import du.zhou.com.du.adapter.MainViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {

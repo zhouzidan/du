@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false">
-
-    <include layout="@layout/toolbar_view" />
+    android:baselineAligned="false"
+    android:orientation="vertical">
+    
+ <du.zhou.com.du.view.TitleView
+     android:id="@+id/titleView"
+     app:title_visibility="false"
+     app:right_tv_txt="submit"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/edit_content"
-        android:minHeight="120dp"
-        android:padding="10dp"
-        android:hint="这一刻，说点什么吧..."
-        android:gravity="start"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:hint="这一刻，说点什么吧..."
+        android:minHeight="120dp"
+        android:padding="10dp" />
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/rv_img"
-        android:layout_margin="10dp"
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.jcodecraeer.xrecyclerview.XRecyclerView>
-
 </LinearLayout>
