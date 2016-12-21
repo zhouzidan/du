@@ -28,9 +28,6 @@ public class App extends Application {
         instance = this;
         XLog.init(LogLevel.ALL);
         Bmob.initialize(this,"70cd28d7e0e1294eef479303c4e9f731");
-
-
-        loginAccount();
     }
 
     private void loginAccount(){

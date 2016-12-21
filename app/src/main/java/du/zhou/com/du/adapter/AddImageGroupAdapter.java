@@ -9,11 +9,9 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import du.zhou.com.du.R;
-import du.zhou.com.du.model.AddImageModel;
 
 /**
  * Created by zhou on 2016/12/11.
@@ -21,14 +19,14 @@ import du.zhou.com.du.model.AddImageModel;
 
 public class AddImageGroupAdapter extends RecyclerView.Adapter<AddImageGroupAdapter.AddImageHolder> {
 
-    private List<AddImageModel> addImageModels;
+    private List<String> localImagePaths;
     private Context context;
     private AddImageCallback callback;
 
 
-    public AddImageGroupAdapter(Context context, List<AddImageModel> addImageModels) {
+    public AddImageGroupAdapter(Context context, List<String> localImagePaths) {
         this.context = context;
-        this.addImageModels = addImageModels;
+        this.localImagePaths = localImagePaths;
     }
 
 
@@ -40,7 +38,7 @@ public class AddImageGroupAdapter extends RecyclerView.Adapter<AddImageGroupAdap
 
     @Override
     public void onBindViewHolder(AddImageHolder holder, final int position) {
-        if (position == addImageModels.size()) {
+        if (position == localImagePaths.size()) {
             holder.imageView.setImageResource(R.mipmap.icon_plus);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -49,7 +47,7 @@ public class AddImageGroupAdapter extends RecyclerView.Adapter<AddImageGroupAdap
                 }
             });
         }else {
-            Glide.with(context).load(addImageModels.get(position).localPath).into(holder.imageView);
+            Glide.with(context).load(localImagePaths.get(position)).into(holder.imageView);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -61,7 +59,7 @@ public class AddImageGroupAdapter extends RecyclerView.Adapter<AddImageGroupAdap
 
     @Override
     public int getItemCount() {
-        return addImageModels.size() + 1;
+        return localImagePaths.size() + 1;
     }
 
     public class AddImageHolder extends RecyclerView.ViewHolder {

@@ -16,12 +16,10 @@ import com.tangxiaolv.telegramgallery.GalleryConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.SaveListener;
 import du.zhou.com.du.R;
+import du.zhou.com.du.UploadService;
 import du.zhou.com.du.adapter.AddImageGroupAdapter;
 import du.zhou.com.du.common.SpacesItemDecoration;
-import du.zhou.com.du.model.AddImageModel;
 import du.zhou.com.du.model.User;
 import du.zhou.com.du.view.TitleView;
 
@@ -34,13 +32,27 @@ public class AddProductActivity extends AppCompatActivity {
     XRecyclerView recyclerView;
     TitleView titleView;
 
-    private List<AddImageModel> addImageModels = new ArrayList<>();
+    private int IMG_MAX_SIZE = 12;
+
+    private int CODE_REQUEST_IMG = 1111;
+
+    private ArrayList<String> localImagePaths = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        XLog.e("是否为空：" + (User.getCurrentUser(User.class) == null));
+        if (User.getCurrentUser(User.class) == null) {
+            Intent mIntent = new Intent(this, LoginActivity.class);
+            startActivity(mIntent);
+        }
     }
 
     private void initView() {
@@ -50,7 +62,7 @@ public class AddProductActivity extends AppCompatActivity {
         recyclerView.setLoadingMoreEnabled(false);
         recyclerView.setPullRefreshEnabled(false);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        AddImageGroupAdapter addImageGroupAdapter = new AddImageGroupAdapter(this, addImageModels);
+        AddImageGroupAdapter addImageGroupAdapter = new AddImageGroupAdapter(this, localImagePaths);
         recyclerView.setAdapter(addImageGroupAdapter);
         recyclerView.addItemDecoration(new SpacesItemDecoration(5));
         addImageGroupAdapter.setCallback(addImageCallback);
@@ -62,35 +74,24 @@ public class AddProductActivity extends AppCompatActivity {
         public void onClick(View view) {
             String content = contentEditText.getText().toString().trim();
 //            addImageModels;
-
-            User user = new User();
-            user.setEmail("369178391@qq.com");
-            user.setPassword("123456");
-            user.setUsername("zhou_guobao");
-            user.signUp(new SaveListener<User>() {
-                @Override
-                public void done(User s, BmobException e) {
-                    XLog.e(s + "--" + e.toString());
-                }
-            });
+            Intent intent = new Intent(AddProductActivity.this, UploadService.class);
+            intent.putExtra(UploadService.KEY_TXT, content);
+            intent.putStringArrayListExtra(UploadService.KEY_IMGS, localImagePaths);
+            startService(intent);
 
         }
     };
-
-    private void onClickBack() {
-
-    }
 
     AddImageGroupAdapter.AddImageCallback addImageCallback = new AddImageGroupAdapter.AddImageCallback() {
         @Override
         public void addNewOne() {
             GalleryConfig config = new GalleryConfig.Build()
-                    .limitPickPhoto(3)
+                    .limitPickPhoto(IMG_MAX_SIZE - localImagePaths.size())
                     .singlePhoto(false)
                     .hintOfPick("this is pick hint")
                     .filterMimeTypes(new String[]{"image/jpeg"})
                     .build();
-            GalleryActivity.openActivity(AddProductActivity.this, 1, config);
+            GalleryActivity.openActivity(AddProductActivity.this, CODE_REQUEST_IMG, config);
         }
 
         @Override
@@ -102,13 +103,11 @@ public class AddProductActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null && data.hasExtra(GalleryActivity.PHOTOS)) {
+        if (requestCode == CODE_REQUEST_IMG && data != null && data.hasExtra(GalleryActivity.PHOTOS)) {
             //list of photos of seleced
             List<String> photos = (List<String>) data.getSerializableExtra(GalleryActivity.PHOTOS);
             for (String photoLocalPath : photos) {
-                AddImageModel model = new AddImageModel();
-                model.localPath = photoLocalPath;
-                addImageModels.add(model);
+                localImagePaths.add(photoLocalPath);
             }
             recyclerView.getAdapter().notifyDataSetChanged();
         }
