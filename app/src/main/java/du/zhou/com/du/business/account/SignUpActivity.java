@@ -1,4 +1,4 @@
-package du.zhou.com.du.activity;
+package du.zhou.com.du.business.account;
 
 import android.content.Intent;
 import android.os.Bundle;

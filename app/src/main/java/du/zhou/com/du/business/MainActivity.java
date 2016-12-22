@@ -1,4 +1,4 @@
-package du.zhou.com.du.activity;
+package du.zhou.com.du.business;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
+import com.elvishew.xlog.XLog;
 
 import du.zhou.com.du.R;
 import du.zhou.com.du.adapter.MainViewPagerAdapter;
@@ -31,5 +32,13 @@ public class MainActivity extends AppCompatActivity {
         navigation.addItem(item3);
         viewPager = (AHBottomNavigationViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(new MainViewPagerAdapter(getSupportFragmentManager()));
+        navigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                XLog.e("position:"+position + " wasSelected:"+wasSelected);
+                viewPager.setCurrentItem(position);
+                return false;
+            }
+        });
     }
 }

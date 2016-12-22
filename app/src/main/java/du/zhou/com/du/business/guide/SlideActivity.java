@@ -1,4 +1,4 @@
-package du.zhou.com.du.activity;
+package du.zhou.com.du.business.guide;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

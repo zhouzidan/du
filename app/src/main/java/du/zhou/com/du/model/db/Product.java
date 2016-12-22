@@ -1,4 +1,4 @@
-package du.zhou.com.du.model;
+package du.zhou.com.du.model.db;
 
 import cn.bmob.v3.BmobObject;
 
@@ -43,4 +43,16 @@ public class Product extends BmobObject {
         this.creator = creator;
     }
 
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "content='" + content + '\'' +
+                ", title='" + title + '\'' +
+                ", creator=" + creator +
+                ", objectId=" + getObjectId() +
+                ", createTime=" + getCreatedAt() +
+
+                '}';
+    }
 }

@@ -1,4 +1,4 @@
-package du.zhou.com.du.model;
+package du.zhou.com.du.model.db;
 
 import cn.bmob.v3.BmobObject;
 
@@ -39,5 +39,14 @@ public class ProductDetail extends BmobObject {
     @Override
     public void setTableName(String tableName) {
         super.setTableName("ProductDetail");
+    }
+
+    @Override
+    public String toString() {
+        return "ProductDetail{" +
+                "product=" + product +
+                ", type='" + type + '\'' +
+                ", value='" + value + '\'' +
+                '}';
     }
 }

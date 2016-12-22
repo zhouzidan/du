@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import du.zhou.com.du.business.IndexFragment;
+import du.zhou.com.du.business.main.IndexFragment;
+import du.zhou.com.du.business.main.MineFragment;
+import du.zhou.com.du.business.main.SquareFragment;
 
 /**
  * Created by zhou on 2016/12/10.
@@ -23,8 +25,8 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
         fragments.clear();
         fragments.add(IndexFragment.newInstance());
-        fragments.add(IndexFragment.newInstance());
-        fragments.add(IndexFragment.newInstance());
+        fragments.add(SquareFragment.newInstance());
+        fragments.add(MineFragment.newInstance());
     }
 
     @Override

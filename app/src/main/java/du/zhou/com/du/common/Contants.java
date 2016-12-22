@@ -17,4 +17,8 @@ public class Contants {
             return this.value;
         }
     }
+
+
+    public static final int PAGE_SIZE = 20 ;
+
 }

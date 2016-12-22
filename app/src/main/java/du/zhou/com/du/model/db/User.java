@@ -1,4 +1,4 @@
-package du.zhou.com.du.model;
+package du.zhou.com.du.model.db;
 
 import cn.bmob.v3.BmobUser;
 
@@ -15,5 +15,9 @@ public class User extends BmobUser {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "User{"+ "object:"+ getObjectId() +"username:"+ getUsername() +
+                "}";
+    }
 }

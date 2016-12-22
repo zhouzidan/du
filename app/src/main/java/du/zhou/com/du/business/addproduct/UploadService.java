@@ -1,4 +1,4 @@
-package du.zhou.com.du;
+package du.zhou.com.du.business.addproduct;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -20,9 +20,9 @@ import cn.bmob.v3.listener.QueryListListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadBatchListener;
 import du.zhou.com.du.common.Contants;
-import du.zhou.com.du.model.Product;
-import du.zhou.com.du.model.ProductDetail;
-import du.zhou.com.du.model.User;
+import du.zhou.com.du.model.db.Product;
+import du.zhou.com.du.model.db.ProductDetail;
+import du.zhou.com.du.model.db.User;
 
 /**
  * 文件上传服务

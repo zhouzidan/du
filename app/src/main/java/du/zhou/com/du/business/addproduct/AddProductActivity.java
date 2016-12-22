@@ -1,4 +1,4 @@
-package du.zhou.com.du.activity;
+package du.zhou.com.du.business.addproduct;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import du.zhou.com.du.R;
-import du.zhou.com.du.UploadService;
 import du.zhou.com.du.adapter.AddImageGroupAdapter;
+import du.zhou.com.du.business.account.LoginActivity;
 import du.zhou.com.du.common.SpacesItemDecoration;
-import du.zhou.com.du.model.User;
+import du.zhou.com.du.model.db.User;
 import du.zhou.com.du.view.TitleView;
 
 /**

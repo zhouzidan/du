@@ -1,4 +1,4 @@
-package du.zhou.com.du.activity;
+package du.zhou.com.du.business.guide;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import du.zhou.com.du.R;
+import du.zhou.com.du.business.MainActivity;
 
 /**
  * Created by zhou on 2016/12/9.
@@ -48,7 +49,7 @@ public class FirstActivity extends AppCompatActivity {
             if (count > 0) {
                 mHandler.sendEmptyMessageDelayed(0, 1000);
             } else {
-                startActivity(new Intent(FirstActivity.this, SlideActivity.class));
+                startActivity(new Intent(FirstActivity.this, MainActivity.class));
                 finish();
             }
 

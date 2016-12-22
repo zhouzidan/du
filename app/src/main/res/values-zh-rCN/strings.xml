@@ -5,5 +5,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--indexFragment-->
-    <string name="number_of_photos">%d Photos</string>
+    <string name="number_of_photos">%d 张</string>
+
 </resources>

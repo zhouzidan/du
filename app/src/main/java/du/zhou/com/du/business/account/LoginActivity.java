@@ -1,4 +1,4 @@
-package du.zhou.com.du.activity;
+package du.zhou.com.du.business.account;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import com.elvishew.xlog.XLog;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import du.zhou.com.du.R;
-import du.zhou.com.du.model.User;
+import du.zhou.com.du.model.db.User;
 
 /**
  * 登录

@@ -10,7 +10,7 @@ import cn.bmob.v3.Bmob;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import du.zhou.com.du.common.PreferenceUtils;
-import du.zhou.com.du.model.User;
+import du.zhou.com.du.model.db.User;
 
 /**
  * Created by zhou on 2016/12/19.
