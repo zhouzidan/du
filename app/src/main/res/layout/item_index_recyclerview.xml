@@ -3,17 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tv_datetime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             tools:text="日期时间" />
 
         <TextView
@@ -21,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:textSize="16sp"
             tools:text="50 Photos" />
     </RelativeLayout>
 
@@ -28,6 +31,7 @@
         android:id="@+id/recyclerview_item_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/color_bg"
         android:overScrollMode="ifContentScrolls"></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

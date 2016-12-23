@@ -22,20 +22,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".business.MainActivity">
+        <activity android:name=".business.account.AccountSettingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".business.MainActivity" />-->
+        <!-- <activity android:name=".business.MainActivity" /> -->
         <activity android:name=".business.guide.SlideActivity" />
         <activity android:name="com.tangxiaolv.telegramgallery.GalleryActivity" />
         <activity android:name=".business.account.LoginActivity" />
         <activity android:name=".business.account.SignUpActivity" />
 
         <service android:name=".business.addproduct.UploadService" />
+
+        <!-- <activity android:name=".business.account.AccountSettingActivity"></activity> -->
+        <activity android:name=".business.account.PhotoProviewActivity"></activity>
     </application>
 
 </manifest>

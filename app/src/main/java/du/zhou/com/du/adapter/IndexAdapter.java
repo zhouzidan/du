@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.elvishew.xlog.XLog;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,13 +44,12 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.ViewHolder> 
         ProductModel model = productModels.get(position);
         holder.tvDatetime.setText(model.getProduct().getCreatedAt());
         String numberOfPhotos = context.getString(R.string.number_of_photos, model.getProductDetails().size());
-        holder.tvPhotoNumber.setText(numberOfPhotos);
+        holder.tvPhotoNumber.setHint(numberOfPhotos);
         holder.recyclerviewItemPhoto.setAdapter(new IndexItemAdapter(context, getImageUrls(model.getProductDetails())));
     }
 
     @Override
     public int getItemCount() {
-        XLog.e("getItemCount:"+productModels.size());
         return productModels.size();
     }
 

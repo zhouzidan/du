@@ -19,7 +19,6 @@ import cn.bmob.v3.listener.FindListener;
 import du.zhou.com.du.R;
 import du.zhou.com.du.adapter.IndexAdapter;
 import du.zhou.com.du.common.Contants;
-import du.zhou.com.du.common.SpacesItemDecoration;
 import du.zhou.com.du.model.ProductModel;
 import du.zhou.com.du.model.db.Product;
 import du.zhou.com.du.model.db.ProductDetail;
@@ -28,6 +27,7 @@ import du.zhou.com.du.model.db.ProductDetail;
 public class IndexFragment extends Fragment {
 
     List<ProductModel> productModels = new ArrayList<>();
+    XRecyclerView recyclerView;
     IndexAdapter indexAdapter = null;
 
     public IndexFragment() {
@@ -50,21 +50,39 @@ public class IndexFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_index, container, false);
-        XRecyclerView recyclerView = (XRecyclerView) view.findViewById(R.id.recyclerview);
+        recyclerView = (XRecyclerView) view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new SpacesItemDecoration(5));
+//        recyclerView.addItemDecoration(new SpacesItemDecoration(5));
         indexAdapter = new IndexAdapter(getContext(), productModels);
         recyclerView.setAdapter(indexAdapter);
+        recyclerView.setLoadingListener(loadingListener);
+        recyclerView.refresh();
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        loadData();
     }
 
 
+    private XRecyclerView.LoadingListener loadingListener = new XRecyclerView.LoadingListener() {
+        @Override
+        public void onRefresh() {
+            loadData();
+            recyclerView.refreshComplete();
+        }
+
+        @Override
+        public void onLoadMore() {
+            loadMoreData();
+            recyclerView.loadMoreComplete();
+        }
+    };
+
+    /**
+     * 刷新数据
+     */
     private void loadData() {
 // 查询 分页
         BmobQuery<Product> productBmobQuery = new BmobQuery<>();
@@ -79,6 +97,7 @@ public class IndexFragment extends Fragment {
             @Override
             public void done(List<ProductDetail> list, BmobException e) {
                 if (e == null) {
+                    productModels.clear();
                     String productObjId = "";
                     List<ProductDetail> temps = new ArrayList<ProductDetail>();
                     for (ProductDetail detail : list) {
@@ -105,4 +124,46 @@ public class IndexFragment extends Fragment {
 
     }
 
+    private void loadMoreData() {
+        BmobQuery<Product> productBmobQuery = new BmobQuery<>();
+        productBmobQuery.setLimit(Contants.PAGE_SIZE);
+        productBmobQuery.order("-createdAt");
+        productBmobQuery.setSkip(productModels.size());
+
+        BmobQuery<ProductDetail> productDetailBmobQuery = new BmobQuery<ProductDetail>();
+        productDetailBmobQuery.addWhereMatchesQuery("product", "Product", productBmobQuery);
+        productDetailBmobQuery.order("createdAt");
+        productDetailBmobQuery.include("product");
+        productDetailBmobQuery.findObjects(new FindListener<ProductDetail>() {
+            @Override
+            public void done(List<ProductDetail> list, BmobException e) {
+                if (e == null) {
+                    if (list != null && list.size() > 0) {
+                        String productObjId = "";
+                        List<ProductDetail> temps = new ArrayList<ProductDetail>();
+                        for (ProductDetail detail : list) {
+                            XLog.e(detail.toString());
+                            if (detail.getProduct().getObjectId().equals(productObjId)) {
+                                temps.add(detail);
+                            } else {
+                                if (temps.size() > 0) {
+                                    productModels.add(new ProductModel(temps));
+                                    temps.clear();
+                                }
+                                productObjId = detail.getProduct().getObjectId();
+                                temps.add(detail);
+                            }
+                        }
+                        if (temps.size() > 0)
+                            productModels.add(new ProductModel(temps));
+                        indexAdapter.notifyDataSetChanged();
+                    } else {
+                        recyclerView.setNoMore(true);
+                    }
+                } else {
+                    XLog.e(e.toString());
+                }
+            }
+        });
+    }
 }

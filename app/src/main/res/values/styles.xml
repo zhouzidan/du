@@ -10,5 +10,31 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!--android:paddingBottom="8dp"-->
+    <!--android:paddingLeft="16dp"-->
+    <!--android:paddingRight="16dp"-->
+    <!--android:paddingTop="8dp"-->
+    <style name="mine_item_style">
+        <item name="android:background">@color/white</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="text_16_black">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="img_right">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:src">@mipmap/ic_right</item>
+    </style>
 
 </resources>
