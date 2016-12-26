@@ -2,13 +2,12 @@ package du.zhou.com.du.business.account;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.elvishew.xlog.XLog;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -22,25 +21,28 @@ import du.zhou.com.du.model.db.User;
  */
 
 public class LoginActivity extends AppCompatActivity {
-    TextInputEditText usernameEditText, passwordEditText;
+
+    private MaterialEditText editUsername;
+    private MaterialEditText editPassword;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         initView();
     }
 
     private void initView() {
-        usernameEditText = (TextInputEditText) findViewById(R.id.edit_username);
-        passwordEditText = (TextInputEditText) findViewById(R.id.edit_password);
-        usernameEditText.setText(UserManager.getInstance().getTempUserName());
-        passwordEditText.setText(UserManager.getInstance().getTempPassword());
+        editUsername = (MaterialEditText) findViewById(R.id.edit_username);
+        editPassword = (MaterialEditText) findViewById(R.id.edit_password);
+        editUsername.setText(UserManager.getInstance().getTempUserName());
+        editPassword.setText(UserManager.getInstance().getTempPassword());
     }
 
     public void onClickLogin(View view) {
-        String username = usernameEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
+        String username = editUsername.getText().toString().trim();
+        String password = editPassword.getText().toString().trim();
         XLog.e(username + password);
         UserManager.getInstance().saveTempUserName(username);
         UserManager.getInstance().saveTempPassword(password);

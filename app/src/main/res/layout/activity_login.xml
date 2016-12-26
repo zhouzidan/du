@@ -8,48 +8,38 @@
     <du.zhou.com.du.view.TitleView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_txt="LOGIN" />
+        app:title_txt="@string/title_login" />
+    
 
-    <android.support.design.widget.TextInputLayout
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edit_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Username">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/edit_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_edit"
-            android:imeOptions="actionNext"
-            android:padding="10dp"
-            android:text="zhou_guobao" />
-    </android.support.design.widget.TextInputLayout>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/hint_username"
+        app:met_floatingLabel="highlight"
+        app:met_singleLineEllipsis="true" />
 
 
-    <android.support.design.widget.TextInputLayout
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edit_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Password">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/edit_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_edit"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:text="123456" />
-    </android.support.design.widget.TextInputLayout>
-
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="0dp"
+        android:hint="@string/hint_password"
+        app:met_floatingLabel="highlight"
+        app:met_singleLineEllipsis="true" />
 
     <TextView
         style="@style/btn_style_18"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:onClick="onClickLogin"
-        android:text="登录" />
+        android:text="@string/btn_login" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,5 +47,5 @@
         android:layout_gravity="end"
         android:layout_marginRight="20dp"
         android:onClick="onClickShowSignUp"
-        android:text="Sign Up" />
+        android:text="@string/btn_signup" />
 </LinearLayout>

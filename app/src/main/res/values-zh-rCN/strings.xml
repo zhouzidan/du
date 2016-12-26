@@ -19,5 +19,16 @@
     <string name="update_success">更新成功</string>
     <string name="update_failed">更新失败</string>
 
+    <!--Login and Sign up activity-->
+    <string name="title_signup">注册</string>
+    <string name="title_login">登录</string>
+    <string name="hint_username">用户名</string>
+    <string name="hint_password">密码</string>
+    <string name="btn_signup">注册</string>
+    <string name="btn_login">登录</string>
+    <string name="error_empty_password">密码不能为空</string>
+    <string name="error_equal_password">两次输入密码不同</string>
+    <string name="error_empty_username">用户不能为空</string>
+
 
 </resources>

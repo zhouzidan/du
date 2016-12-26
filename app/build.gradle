@@ -64,4 +64,6 @@ dependencies {
     compile 'cn.bmob.android:http-legacy:1.0'
     // android key store
     compile 'com.yakivmospan:scytale:1.0.0'
+    // edittext
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }
