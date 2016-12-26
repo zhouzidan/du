@@ -21,6 +21,7 @@ import com.tangxiaolv.telegramgallery.GalleryConfig;
 
 import java.io.File;
 
+import cn.bmob.v3.BmobUser;
 import du.zhou.com.du.R;
 import du.zhou.com.du.common.CapturePhotoHelper;
 import du.zhou.com.du.common.FolderManager;
@@ -89,6 +90,11 @@ public class AccountSettingActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public void onClickLogout(View view){
+        BmobUser.logOut();
+        finish();
     }
 
     public void onClickChoosePhotoDialog(View view) {

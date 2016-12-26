@@ -13,6 +13,7 @@ import com.elvishew.xlog.XLog;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import du.zhou.com.du.R;
+import du.zhou.com.du.common.UserManager;
 import du.zhou.com.du.model.db.User;
 
 /**
@@ -21,18 +22,28 @@ import du.zhou.com.du.model.db.User;
  */
 
 public class LoginActivity extends AppCompatActivity {
+    TextInputEditText usernameEditText, passwordEditText;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initView();
+    }
+
+    private void initView() {
+        usernameEditText = (TextInputEditText) findViewById(R.id.edit_username);
+        passwordEditText = (TextInputEditText) findViewById(R.id.edit_password);
+        usernameEditText.setText(UserManager.getInstance().getTempUserName());
+        passwordEditText.setText(UserManager.getInstance().getTempPassword());
     }
 
     public void onClickLogin(View view) {
-        TextInputEditText usernameEditText = (TextInputEditText) findViewById(R.id.edit_username);
-        TextInputEditText passwordEditText = (TextInputEditText) findViewById(R.id.edit_password);
         String username = usernameEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         XLog.e(username + password);
+        UserManager.getInstance().saveTempUserName(username);
+        UserManager.getInstance().saveTempPassword(password);
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);

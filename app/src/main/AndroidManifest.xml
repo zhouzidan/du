@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".business.account.AccountSettingActivity">
+        <activity android:name=".business.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,8 +36,7 @@
         <activity android:name=".business.account.SignUpActivity" />
 
         <service android:name=".business.addproduct.UploadService" />
-
-        <!-- <activity android:name=".business.account.AccountSettingActivity"></activity> -->
+        <activity android:name=".business.account.AccountSettingActivity"></activity>
         <activity android:name=".business.account.PhotoProviewActivity"></activity>
     </application>
 

@@ -45,8 +45,13 @@ public class MineFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         initView(view);
-        initData();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     private void initView(View view) {
@@ -55,7 +60,6 @@ public class MineFragment extends Fragment {
         view.findViewById(R.id.layout_collection).setOnClickListener(onClickListener);
         view.findViewById(R.id.layout_info).setOnClickListener(onClickListener);
         view.findViewById(R.id.layout_photos).setOnClickListener(onClickListener);
-
     }
 
     private void initData() {
