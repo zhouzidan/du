@@ -22,13 +22,17 @@
     <!--Login and Sign up activity-->
     <string name="title_signup">注册</string>
     <string name="title_login">登录</string>
-    <string name="hint_username">用户名</string>
+    <string name="hint_username">用户名/Email</string>
     <string name="hint_password">密码</string>
     <string name="btn_signup">注册</string>
     <string name="btn_login">登录</string>
     <string name="error_empty_password">密码不能为空</string>
     <string name="error_equal_password">两次输入密码不同</string>
     <string name="error_empty_username">用户不能为空</string>
-
-
+    <string name="error_invalid_email">邮箱非法</string>
+    <string name="msg_login_success">登录成功</string>
+    <string name="msg_signup_success">注册成功</string>
+    <string name="txt_username">用户名</string>
+    <string name="txt_email">邮箱</string>
+    <string name="txt_face">头像</string>
 </resources>

@@ -27,7 +27,8 @@ public class User extends BmobUser {
 
     @Override
     public String toString() {
-        return "User{" + "object:" + getObjectId() + "username:" + getUsername() +
+        return "User{" + "object:" + getObjectId() + "username:" + getUsername()
+                + "-getEmailVerified:" + getEmailVerified() == null ? "null":getEmailVerified() +
                 "}";
     }
 }

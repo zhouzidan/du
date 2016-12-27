@@ -38,7 +38,7 @@
 
             <TextView
                 style="@style/text_16_black"
-                android:text="头像" />
+                android:text="@string/txt_face" />
 
             <ImageView
                 android:id="@+id/img_right"
@@ -47,6 +47,7 @@
                 android:layout_centerVertical="true" />
 
             <ImageView
+                android:id="@+id/img_face"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
@@ -64,20 +65,14 @@
 
             <TextView
                 style="@style/text_16_black"
-                android:text="名字" />
-
-            <ImageView
-                android:id="@+id/img_right_name"
-                style="@style/img_right"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
+                android:text="@string/txt_username" />
 
             <TextView
+                android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/img_right_name"
-                android:background="@color/colorAccent" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -90,15 +85,16 @@
 
             <TextView
                 style="@style/text_16_black"
-                android:text="用户名" />
+                android:text="@string/txt_email" />
 
             <TextView
+                android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="username" />
+                android:layout_centerVertical="true" />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -118,7 +114,7 @@
                 android:layout_centerVertical="true" />
 
         </RelativeLayout>
-        
+
         <Button
             style="@style/btn_style_18"
             android:layout_gravity="center_horizontal"

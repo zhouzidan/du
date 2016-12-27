@@ -4,18 +4,26 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v13.app.ActivityCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.tangxiaolv.telegramgallery.GalleryActivity;
 import com.tangxiaolv.telegramgallery.GalleryConfig;
 
@@ -25,6 +33,7 @@ import cn.bmob.v3.BmobUser;
 import du.zhou.com.du.R;
 import du.zhou.com.du.common.CapturePhotoHelper;
 import du.zhou.com.du.common.FolderManager;
+import du.zhou.com.du.model.db.User;
 
 public class AccountSettingActivity extends AppCompatActivity {
     private static final int CODE_REQUEST_IMG = 1112;
@@ -42,11 +51,53 @@ public class AccountSettingActivity extends AppCompatActivity {
     private File mRestorePhotoFile;
 
     // 账户设置  头像 密码 邮箱
+    private ImageView imgFace;
+    private TextView tvUsername;
+    private TextView tvEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setting);
+        initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    private void initView() {
+        imgFace = (ImageView) findViewById(R.id.img_face);
+        tvUsername = (TextView) findViewById(R.id.tv_username);
+        tvEmail = (TextView) findViewById(R.id.tv_email);
+    }
+
+    private void initData() {
+        User user = BmobUser.getCurrentUser(User.class);
+        if (user != null) {
+            tvUsername.setText(user.getUsername());
+            tvEmail.setText(user.getEmail());
+            if (user.getEmailVerified() != null && user.getEmailVerified()) {
+//                tvEmail.append("(已验证)");
+            } else {
+                tvEmail.append("(未验证)");
+            }
+            if (TextUtils.isEmpty(user.getFaceUrl())) {
+                Glide.with(this).load(R.mipmap.ic_face_defult).into(imgFace);
+            } else {
+                Glide.with(this).load(user.getFaceUrl()).asBitmap().centerCrop().into(new BitmapImageViewTarget(imgFace) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        super.setResource(resource);
+                        RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), resource);
+                        circularBitmapDrawable.setCircular(true);
+                        imgFace.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
+            }
+        }
     }
 
 
@@ -76,10 +127,10 @@ public class AccountSettingActivity extends AppCompatActivity {
             File photoFile = mCapturePhotoHelper.getPhoto();
             if (photoFile != null) {
                 if (resultCode == RESULT_OK) {
-                String imgFilePath = photoFile.getPath();
+                    String imgFilePath = photoFile.getPath();
                     Intent intent = new Intent(AccountSettingActivity.this, PhotoProviewActivity.class);
-                    intent.putExtra(PhotoProviewActivity.EXTRA_PHOTO,imgFilePath);
-                    startActivityForResult(intent,CODE_PHOTO_PROVIEW);
+                    intent.putExtra(PhotoProviewActivity.EXTRA_PHOTO, imgFilePath);
+                    startActivityForResult(intent, CODE_PHOTO_PROVIEW);
                 } else {
                     if (photoFile.exists()) {
                         photoFile.delete();
@@ -92,7 +143,7 @@ public class AccountSettingActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickLogout(View view){
+    public void onClickLogout(View view) {
         BmobUser.logOut();
         finish();
     }
@@ -119,7 +170,7 @@ public class AccountSettingActivity extends AppCompatActivity {
     /**
      * 拍照
      */
-    private void takePhotoByCarema(){
+    private void takePhotoByCarema() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //Android M 处理Runtime Permission
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {//检查是否有写入SD卡的授权
 //                Log.i(TAG, "granted permission!");
@@ -135,10 +186,11 @@ public class AccountSettingActivity extends AppCompatActivity {
             turnOnCamera();
         }
     }
+
     /**
      * 本地相册
      */
-    private void choosePhotoFromLocal(){
+    private void choosePhotoFromLocal() {
         GalleryConfig config = new GalleryConfig.Build()
                 .singlePhoto(true)
                 .hintOfPick("this is pick hint")

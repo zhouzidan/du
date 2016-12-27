@@ -11,12 +11,13 @@
         app:title_txt="@string/title_signup" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/edit_username"
+        android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:hint="@string/hint_username"
+        android:text="369178391@qq.com"
         app:met_floatingLabel="highlight"
         app:met_singleLineEllipsis="true" />
 
@@ -28,6 +29,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="0dp"
         android:hint="@string/hint_password"
+        android:text="123456"
         app:met_floatingLabel="highlight"
         app:met_singleLineEllipsis="true" />
 
@@ -40,6 +42,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="0dp"
         android:hint="Repet Password"
+        android:text="123456"
         app:met_floatingLabel="highlight"
         app:met_singleLineEllipsis="true" />
 
